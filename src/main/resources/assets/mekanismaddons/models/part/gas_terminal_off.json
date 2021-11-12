@@ -1,0 +1,8 @@
+{
+  "parent": "appliedenergistics2:part/display_off",
+  "textures": {
+    "lightsBright": "mekanismaddons:part/gas_terminal_bright",
+    "lightsMedium": "mekanismaddons:part/gas_terminal_medium",
+    "lightsDark": "mekanismaddons:part/gas_terminal_dark"
+  }
+}

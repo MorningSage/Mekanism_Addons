@@ -1,0 +1,9 @@
+{
+  "parent": "appliedenergistics2:item/display_base",
+  "textures": {
+    "front": "mekanismaddons:part/gas_terminal",
+    "front_bright": "mekanismaddons:part/gas_terminal_bright",
+    "front_medium": "mekanismaddons:part/gas_terminal_medium",
+    "front_dark": "mekanismaddons:part/gas_terminal_dark"
+  }
+}

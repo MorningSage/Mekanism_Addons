@@ -1,0 +1,14 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "result" : {
+    "item" : "mekanismaddons:module_dihydrogen_monoxide_avidity_unit"
+  },
+  "pattern":["I#I","SAS","PPP"],
+  "key":{
+    "I":{"tag":"forge:alloys/advanced"},
+    "A":{"item":"mekanism:module_base"},
+    "S":{"item":"minecraft:scute"},
+    "#":{"item":"minecraft:turtle_helmet"},
+    "P":{"item":"mekanism:hdpe_sheet"}
+  }
+}

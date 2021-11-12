@@ -1,0 +1,12 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "result" : {
+    "item" : "mekanismaddons:upgrade_luck"
+  },
+  "pattern" : [" G ", "A#A", " G "],
+  "key" : {
+    "G" : { "tag" : "forge:glass" },
+    "#" : { "item" : "mekanism:pellet_antimatter" },
+    "A" : { "tag" : "mekanism:alloys/infused" }
+  }
+}

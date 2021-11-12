@@ -1,0 +1,14 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "result" : {
+    "item" : "mekanismaddons:module_aoe_unit"
+  },
+  "pattern":["IDI","#A#","PPP"],
+  "key":{
+    "I":{"tag":"forge:alloys/elite"},
+    "A":{"item":"mekanism:module_base"},
+    "D":{"item":"minecraft:diamond_pickaxe"},
+    "#":{"item":"minecraft:netherite_pickaxe"},
+    "P":{"item":"mekanism:hdpe_sheet"}
+  }
+}

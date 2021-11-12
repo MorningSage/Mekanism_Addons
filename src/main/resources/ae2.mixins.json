@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "morningsage.mekanismaddons.mixin",
+  "refmap": "mekanismaddons.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "plugin": "morningsage.mekanismaddons.plugins.AE2Plugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

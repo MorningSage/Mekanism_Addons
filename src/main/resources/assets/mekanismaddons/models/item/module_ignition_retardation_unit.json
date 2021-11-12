@@ -1,0 +1,6 @@
+{
+  "parent" : "minecraft:item/generated",
+  "textures" : {
+    "layer0" : "mekanismaddons:item/module_ignition_retardation_unit"
+  }
+}

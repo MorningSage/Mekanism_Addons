@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "morningsage.mekanismaddons.mixin",
+  "refmap": "mekanismaddons.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "mekanism.AbstractBlockMixin",
+    "mekanism.EnumUtilsAccessor",
+    "mekanism.ItemMekaToolMixin",
+    "mekanism.ModuleDataAccessor",
+    "mekanism.ModuleNutritionalInjectionUnitMixin",
+    "mekanism.ModulesAccessor",
+    "mekanism.OutputHelperAccessor",
+    "minecraft.SpawnEggItemAccessor",
+    "mekanism.TileEntityElectricMachineMixin",
+    "mekanism.TileEntityItemToItemFactoryMixin",
+    "mekanism.UpgradeUtilsMixin",
+    "mekanism.ItemMekaSuitArmorMixin"
+  ],
+  "client": [
+    "minecraft.PlayerControllerAccessor",
+    "mekanism.RenderTickHandlerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

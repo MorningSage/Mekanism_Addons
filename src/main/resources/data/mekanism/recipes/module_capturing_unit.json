@@ -1,0 +1,14 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "result" : {
+    "item" : "mekanismaddons:module_capturing_unit"
+  },
+  "pattern":["IEI","#A#","PPP"],
+  "key":{
+    "I":{"tag":"forge:alloys/elite"},
+    "A":{"item":"mekanism:module_base"},
+    "E":{"item":"minecraft:egg"},
+    "#":{"item":"minecraft:lead"},
+    "P":{"item":"mekanism:hdpe_sheet"}
+  }
+}

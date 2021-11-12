@@ -1,0 +1,13 @@
+{
+  "type" : "minecraft:crafting_shaped",
+  "result" : {
+    "item" : "mekanismaddons:module_atmospheric_avidity_unit"
+  },
+  "pattern":["I#I","#A#","PPP"],
+  "key":{
+    "I":{"tag":"forge:alloys/advanced"},
+    "A":{"item":"mekanism:module_base"},
+    "#":{"item":"minecraft:scaffolding"},
+    "P":{"item":"mekanism:hdpe_sheet"}
+  }
+}

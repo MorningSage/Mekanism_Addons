@@ -1,0 +1,31 @@
+{
+  "module.mekanismaddons.dihydrogen_monoxide_avidity_unit": "Dihydrogen Monoxide Avidity Unit",
+  "description.mekanismaddons.dihydrogen_monoxide_avidity_unit": "Negates the slowness caused when mining while underwater.",
+  "module.mekanismaddons.atmospheric_avidity_unit": "Atmospheric Avidity Unit",
+  "description.mekanismaddons.atmospheric_avidity_unit": "Negates the slowness caused when mining while in the air.",
+  "module.mekanismaddons.capturing_unit": "Capturing Unit",
+  "description.mekanismaddons.capturing_unit": "Gives a chance to drop spawn eggs when killing mobs.",
+  "module.mekanismaddons.aoe_unit": "AOE Unit",
+  "description.mekanismaddons.aoe_unit": "Allows the Meka-Tool to hit/mine in a configurable area of effect.",
+  "module.mekanismaddons.aoe": "AOE: %s",
+  "module.mekanismaddons.aoe_mode":"AOE Mode",
+  "item.mekanismaddons.upgrade_luck": "Luck Upgrade",
+  "module.mekanismaddons.ambulation_acceleration_unit": "Ambulation Acceleration Unit",
+  "description.mekanismaddons.ambulation_acceleration_unit": "Increases walking speed as opposed to sprinting speed",
+  "module.mekanismaddons.ignition_retardation_unit": "Ignition Retardation Unit",
+  "description.mekanismaddons.ignition_retardation_unit": "Provides Fire Resistance to the wearer",
+
+  "module.mekanismaddons.walk_boost":"Walk Boost",
+  "upgrade.mekanism.luck": "Luck",
+  "upgrade.mekanism.luck.description": "Gives a small chance to double the processing output.",
+
+  "item.mekanismaddons.1k_gas_cell_component": "1k ME Gas Storage Component",
+  "item.mekanismaddons.4k_gas_cell_component": "4k ME Gas Storage Component",
+  "item.mekanismaddons.16k_gas_cell_component": "16k ME Gas Storage Component",
+  "item.mekanismaddons.64k_gas_cell_component": "64k ME Gas Storage Component",
+
+  "item.mekanismaddons.1k_gas_storage_cell": "1k ME Gas Storage Cell",
+  "item.mekanismaddons.4k_gas_storage_cell": "4k ME Gas Storage Cell",
+  "item.mekanismaddons.16k_gas_storage_cell": "16k ME Gas Storage Cell",
+  "item.mekanismaddons.64k_gas_storage_cell": "64k ME Gas Storage Cell"
+}
