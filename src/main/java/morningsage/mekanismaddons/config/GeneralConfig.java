@@ -29,7 +29,7 @@ public class GeneralConfig extends BaseMekanismConfig {
     GeneralConfig() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.comment("General Config. This config is synced from server to client.").push("general");
-        this.mekaSuitSodiumTransferRate = CachedLongValue.wrap(this, builder.comment("Rate at which Sodium can be transferred into the Ignition Retardation Unit.").defineInRange("mekaSuitSodiumTransferRate", 256L, 1L, 9223372036854775807L));
+        this.mekaSuitSodiumTransferRate = CachedLongValue.wrap(this, builder.comment("Rate at which Sodium can be transferred into the Ignition Retardation Unit.").defineInRange("mekaSuitSodiumTransferRate", 1024L, 1L, 9223372036854775807L));
         this.mekaSuitSodiumMaxStorage = CachedLongValue.wrap(this, builder.comment("Maximum amount of Sodium storable by the Ignition Retardation Unit.").defineInRange("mekaSuitSodiumMaxStorage", 128000L, 1L, 9223372036854775807L));
         this.mekaSuitSodiumUsageRate = CachedIntValue.wrap(this, builder.comment("Sodium usage of the Ignition Retardation Unit when removing fire effects.").define("mekaSuitSodiumUsageRate", 1234));
         this.mekaSuitHeatedSodiumCoolRate = CachedFloatingLongValue.define(this, builder, "Heated Sodium cool rate after being used by the Ignition Retardation Unit.", "mekaSuitHeatedSodiumCoolRate", FloatingLong.createConst(66L));

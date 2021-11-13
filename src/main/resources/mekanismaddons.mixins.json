@@ -7,20 +7,20 @@
   "mixins": [
     "mekanism.AbstractBlockMixin",
     "mekanism.EnumUtilsAccessor",
+    "mekanism.ItemMekaSuitArmorMixin",
     "mekanism.ItemMekaToolMixin",
     "mekanism.ModuleDataAccessor",
     "mekanism.ModuleNutritionalInjectionUnitMixin",
     "mekanism.ModulesAccessor",
     "mekanism.OutputHelperAccessor",
-    "minecraft.SpawnEggItemAccessor",
     "mekanism.TileEntityElectricMachineMixin",
     "mekanism.TileEntityItemToItemFactoryMixin",
     "mekanism.UpgradeUtilsMixin",
-    "mekanism.ItemMekaSuitArmorMixin"
+    "minecraft.SpawnEggItemAccessor"
   ],
   "client": [
-    "minecraft.PlayerControllerAccessor",
-    "mekanism.RenderTickHandlerMixin"
+    "mekanism.RenderTickHandlerMixin",
+    "minecraft.PlayerControllerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

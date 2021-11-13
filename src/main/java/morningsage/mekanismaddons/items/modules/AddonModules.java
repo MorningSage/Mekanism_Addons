@@ -37,6 +37,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -116,7 +117,8 @@ public class AddonModules {
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onGetBreakSpeed);
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onLivingEntityDrops);
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onMekaSuitArmorTick);
-        MinecraftForge.EVENT_BUS.addListener(AddonModules::onPlayerBurn);
+        MinecraftForge.EVENT_BUS.addListener(AddonModules::onPlayerDamage);
+        MinecraftForge.EVENT_BUS.addListener(AddonModules::onPlayerRenderOverlay);
 
         CustomEventBus.EVENT_BUS.addListener(AddonModules::onMekaSuitInit);
 
@@ -223,8 +225,9 @@ public class AddonModules {
         }
     }
 
-    public static void onPlayerBurn(final LivingAttackEvent event) {
+    public static void onPlayerDamage(final LivingAttackEvent event) {
         LivingEntity entity = event.getEntityLiving();
+        if (entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative()) return;
 
         ItemStack container = entity.getItemBySlot(EquipmentSlotType.LEGS);
         ModuleIgnitionRetardationUnit moduleIgnition = Modules.load(container, AddonModules.IGNITION_RETARDATION_UNIT);
@@ -236,7 +239,20 @@ public class AddonModules {
         }
     }
 
-    public static void onMekaSuitArmorTick(final MekaSuitArmorTick.Server event) {
+    public static void onPlayerRenderOverlay(final RenderBlockOverlayEvent event) {
+        if (event.getOverlayType() != RenderBlockOverlayEvent.OverlayType.FIRE) return;
+
+        ItemStack container = event.getPlayer().getItemBySlot(EquipmentSlotType.LEGS);
+        ModuleIgnitionRetardationUnit moduleIgnition = Modules.load(container, AddonModules.IGNITION_RETARDATION_UNIT);
+
+        if (moduleIgnition != null && moduleIgnition.canFunction(event.getPlayer())) {
+            event.setCanceled(true);
+        }
+    }
+
+    public static void onMekaSuitArmorTick(final MekaSuitArmorTick event) {
+        if (event.getPlayer().isInLava()) return;
+
         Optional<IGasHandler> capability = event.getStack().getCapability(Capabilities.GAS_HANDLER_CAPABILITY).resolve();
         FloatingLong amount = AddonConfig.general.mekaSuitHeatedSodiumCoolRate.get();
 
