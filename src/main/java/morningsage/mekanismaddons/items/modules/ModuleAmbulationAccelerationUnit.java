@@ -4,10 +4,10 @@ import mekanism.api.IIncrementalEnum;
 import mekanism.api.math.FloatingLong;
 import mekanism.api.math.MathUtils;
 import mekanism.api.text.IHasTextComponent;
-import mekanism.common.config.MekanismConfig;
 import mekanism.common.content.gear.ModuleConfigItem;
 import mekanism.common.content.gear.mekasuit.ModuleMekaSuit;
 import morningsage.mekanismaddons.MekanismAddonsLang;
+import morningsage.mekanismaddons.config.AddonConfig;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
@@ -35,7 +35,7 @@ public class ModuleAmbulationAccelerationUnit extends ModuleMekaSuit {
             if (player.isInWater()) boost /= 5.0F;
 
             player.moveRelative(boost, new Vector3d(0.0D, 0.0D, 1.0D));
-            this.useEnergy(player, MekanismConfig.gear.mekaSuitEnergyUsageSprintBoost.get().multiply(this.getBoost() / 0.1F));
+            this.useEnergy(player, AddonConfig.general.mekaSuitEnergyUsageWalkBoost.get().multiply(this.getBoost() / 0.1F));
         }
     }
 
@@ -52,7 +52,8 @@ public class ModuleAmbulationAccelerationUnit extends ModuleMekaSuit {
     }
 
     public boolean canFunction(PlayerEntity player) {
-        FloatingLong usage = MekanismConfig.gear.mekaSuitEnergyUsageSprintBoost.get().multiply(this.getBoost() / 0.1F);
+        if (!AddonConfig.general.ambulationAccelerationUnitEnabled.get()) return false;
+        FloatingLong usage = AddonConfig.general.mekaSuitEnergyUsageWalkBoost.get().multiply(this.getBoost() / 0.1F);
         return player.zza > 0 && this.getContainerEnergy().greaterOrEqual(usage);
     }
 

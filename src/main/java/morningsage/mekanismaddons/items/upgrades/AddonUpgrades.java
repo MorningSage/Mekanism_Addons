@@ -11,12 +11,12 @@ import mekanism.common.item.ItemUpgrade;
 import mekanism.common.registration.impl.ItemRegistryObject;
 import mekanism.common.registries.MekanismBlockTypes;
 import mekanism.common.tier.FactoryTier;
+import mekanism.common.util.EnumUtils;
+import morningsage.mekanismaddons.mixin.mekanism.EnumUtilsAccessor;
 import morningsage.mekanismaddons.utils.EnumBuilder;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class AddonUpgrades {
 
@@ -41,8 +41,13 @@ public class AddonUpgrades {
     }
 
     private static Upgrade registerUpgrade(String name, APILang langKey, APILang descLangKey, int maxStack, EnumColor color) {
-        Upgrade upgrade = upgradeEnumBuilder.create(name).init(name, langKey, descLangKey, maxStack, color);
+        Upgrade upgrade = upgradeEnumBuilder.create(name.toUpperCase()).init(name, langKey, descLangKey, maxStack, color);
         UPGRADES_BY_NAME.put(name, upgrade);
+
+        List<Upgrade> values = new ArrayList<>(Arrays.asList(EnumUtils.UPGRADES));
+        values.add(upgrade);
+        EnumUtilsAccessor.setUpgrades(values.toArray((Upgrade[]) Array.newInstance(Upgrade.class, 0)));
+
         return upgrade;
     }
 

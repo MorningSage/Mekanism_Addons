@@ -62,7 +62,7 @@ public class EnumBuilder<T extends Enum<?>> {
 
                     // 2. Copy it
                     T[] previousValues = (T[]) valuesField.get(enumClass);
-                    List<T> values = new ArrayList<T>(Arrays.asList(previousValues));
+                    List<T> values = new ArrayList<>(Arrays.asList(previousValues));
 
                     // 4. add new value
                     values.add(newValue);
@@ -82,10 +82,11 @@ public class EnumBuilder<T extends Enum<?>> {
         }
 
         private T makeEnum(String value, int ordinal, Object[] additionalValues) {
-            Object[] parms = new Object[additionalValues.length + 2];
-            parms[0] = value; parms[1] = ordinal;
-            System.arraycopy(additionalValues, 0, parms, 2, additionalValues.length);
-            return enumClass.cast(getConstructorAccessor(enumClass, parms));
+            Object[] params = new Object[additionalValues.length + 2];
+            params[0] = value;
+            params[1] = ordinal;
+            System.arraycopy(additionalValues, 0, params, 2, additionalValues.length);
+            return enumClass.cast(getConstructorAccessor(enumClass, params));
         }
         private Object getConstructorAccessor(Class<?> enumClass, Object[] params) {
             for (Constructor<?> declaredConstructor : enumClass.getDeclaredConstructors()) {

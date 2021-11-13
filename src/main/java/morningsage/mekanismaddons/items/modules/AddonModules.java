@@ -9,7 +9,6 @@ import mekanism.api.math.FloatingLong;
 import mekanism.api.text.ILangEntry;
 import mekanism.common.capabilities.Capabilities;
 import mekanism.common.capabilities.chemical.item.RateLimitMultiTankGasHandler;
-import mekanism.common.config.MekanismConfig;
 import mekanism.common.content.gear.Module;
 import mekanism.common.content.gear.Modules;
 import mekanism.common.content.gear.Modules.ModuleData;
@@ -18,7 +17,8 @@ import mekanism.common.registration.impl.ItemRegistryObject;
 import mekanism.common.registries.MekanismGases;
 import mekanism.common.registries.MekanismItems;
 import morningsage.mekanismaddons.MekanismAddonsLang;
-import morningsage.mekanismaddons.events.*;
+import morningsage.mekanismaddons.config.AddonConfig;
+import morningsage.mekanismaddons.events.CustomEventBus;
 import morningsage.mekanismaddons.events.mekasuit.MekaSuitArmorInit;
 import morningsage.mekanismaddons.events.mekasuit.MekaSuitArmorTick;
 import morningsage.mekanismaddons.events.mekatool.MekaToolBlockBreakEvent;
@@ -121,7 +121,6 @@ public class AddonModules {
         CustomEventBus.EVENT_BUS.addListener(AddonModules::onMekaSuitInit);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(AddonModules::setupModules);
-
     }
 
     private static <M extends Module> Modules.ModuleData<M> register(String name, ILangEntry langEntry, ILangEntry description, Supplier<M> moduleSupplier) {
@@ -134,13 +133,15 @@ public class AddonModules {
     }
 
     public static void onMekaToolBreakBlock(final MekaToolBlockBreakEvent event) {
-        if (event.isCanceled() || !(event.getPlayer() instanceof ServerPlayerEntity)) return;
+        if (event.isCanceled() || !(event.getPlayer() instanceof ServerPlayerEntity) || !AddonConfig.general.aoeUnitEnabled.get())
+            return;
         ModuleAOEUnit module = Modules.load(event.getStack(), AddonModules.AOE_UNIT);
         if (module == null) return;
         module.doBreakAOE((ServerPlayerEntity) event.getPlayer(), AOEUtils.getAOEArea(event.getPlayer(), event.getPos(), module, Dist.DEDICATED_SERVER), event.getPos(), event::breakBlock);
     }
     public static void onMekaToolDestroySpeed(final MekaToolDestroySpeedEvent event) {
-        if (event.isCanceled() || event.getDestroySpeed() <= 0 || event.getPos() == null) return;
+        if (event.isCanceled() || event.getDestroySpeed() <= 0 || event.getPos() == null || !AddonConfig.general.aoeUnitEnabled.get())
+            return;
 
         ModuleAOEUnit module = Modules.load(event.getStack(), AddonModules.AOE_UNIT);
         if (module == null || !AOEUtils.canPlayerAOE(event.getPlayer(), module, null)) return;
@@ -202,8 +203,8 @@ public class AddonModules {
         if (event.getArmor().getSlot() == EquipmentSlotType.LEGS) {
             event.addGasTank(
                 new RateLimitMultiTankGasHandler.GasTankSpec(
-                    MekanismConfig.gear.mekaSuitNutritionalTransferRate,
-                    MekanismConfig.gear.mekaSuitNutritionalMaxStorage,
+                    AddonConfig.general.mekaSuitSodiumTransferRate,
+                    AddonConfig.general.mekaSuitSodiumMaxStorage,
                     (gas, automationType) -> automationType != AutomationType.EXTERNAL,
                     (gas, automationType) -> true,
                     (gas) -> gas == MekanismGases.SODIUM.get()
@@ -212,8 +213,8 @@ public class AddonModules {
 
             event.addGasTank(
                 new RateLimitMultiTankGasHandler.GasTankSpec(
-                    MekanismConfig.gear.mekaSuitNutritionalTransferRate,
-                    MekanismConfig.gear.mekaSuitNutritionalMaxStorage,
+                    AddonConfig.general.mekaSuitSodiumTransferRate,
+                    AddonConfig.general.mekaSuitSodiumMaxStorage,
                     (gas, automationType) -> automationType != AutomationType.EXTERNAL,
                     (gas, automationType) -> automationType != AutomationType.EXTERNAL,
                     gas -> gas == MekanismGases.SUPERHEATED_SODIUM.get()
@@ -237,7 +238,7 @@ public class AddonModules {
 
     public static void onMekaSuitArmorTick(final MekaSuitArmorTick.Server event) {
         Optional<IGasHandler> capability = event.getStack().getCapability(Capabilities.GAS_HANDLER_CAPABILITY).resolve();
-        FloatingLong amount = MekanismConfig.gear.mekaSuitEnergyUsageSprintBoost.get().divide(1.5);
+        FloatingLong amount = AddonConfig.general.mekaSuitHeatedSodiumCoolRate.get();
 
         if (capability.isPresent()) {
             IGasHandler gasHandler = capability.get();

@@ -2,6 +2,7 @@ package morningsage.mekanismaddons.mixin.mekanism;
 
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.recipes.outputs.IOutputHandler;
+import mekanism.api.recipes.outputs.OutputHelper;
 import mekanism.common.tile.factory.TileEntityItemToItemFactory;
 import morningsage.mekanismaddons.recipes.SmartItemStackOutputHandler;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ public abstract class TileEntityItemToItemFactoryMixin {
         remap = false
     )
     protected IOutputHandler<ItemStack> addSlots(IInventorySlot outputSlot) {
-        return new SmartItemStackOutputHandler((TileEntityItemToItemFactory<?>)(Object) this, outputSlot);
+        return SmartItemStackOutputHandler.getOutputHandler(OutputHelper.getOutputHandler(outputSlot), (TileEntityItemToItemFactory<?>) (Object) this, outputSlot);
     }
 
 }

@@ -13,6 +13,7 @@ import mekanism.common.content.gear.Modules;
 import mekanism.common.content.gear.mekatool.ModuleMekaTool;
 import mekanism.common.registries.MekanismItems;
 import morningsage.mekanismaddons.MekanismAddonsLang;
+import morningsage.mekanismaddons.config.AddonConfig;
 import morningsage.mekanismaddons.events.mekatool.MekaToolBlockBreakEvent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -40,7 +41,7 @@ public class ModuleAOEUnit extends ModuleMekaTool {
 
     @Override
     public void addHUDStrings(List<ITextComponent> list) {
-        if (isEnabled()) {
+        if (AddonConfig.general.aoeUnitEnabled.get() && isEnabled()) {
             list.add(MekanismAddonsLang.MODULE_AOE.translateColored(EnumColor.DARK_GRAY, EnumColor.INDIGO, getModeString()));
         }
     }
@@ -53,6 +54,8 @@ public class ModuleAOEUnit extends ModuleMekaTool {
 
     @Override
     public void changeMode(@Nonnull PlayerEntity player, @Nonnull ItemStack stack, int shift, boolean displayChangeMessage) {
+        if (!AddonConfig.general.aoeUnitEnabled.get()) return;
+
         AOERange newMode = range.get().adjust(shift);
 
         if (range.get() != newMode) {
@@ -65,6 +68,8 @@ public class ModuleAOEUnit extends ModuleMekaTool {
     }
 
     public void doBreakAOE(ServerPlayerEntity player, Iterable<BlockPos> area, BlockPos centerPos, MekaToolBlockBreakEvent.BreakBlockCallback callback) {
+        if (!AddonConfig.general.aoeUnitEnabled.get()) return;
+
         IEnergyContainer energyContainer = getEnergyContainer();
         if (energyContainer == null) return;
 

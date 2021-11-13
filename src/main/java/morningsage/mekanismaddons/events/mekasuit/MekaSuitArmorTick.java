@@ -37,7 +37,6 @@ public abstract class MekaSuitArmorTick extends Event {
         }
     }
 
-
     public static class Server extends MekaSuitArmorTick {
         private Server(ItemStack stack, World world, PlayerEntity player) {
             super(stack, world, player);

@@ -6,6 +6,7 @@ import mekanism.api.chemical.gas.IGasHandler;
 import mekanism.common.capabilities.Capabilities;
 import mekanism.common.content.gear.mekasuit.ModuleMekaSuit;
 import mekanism.common.registries.MekanismGases;
+import morningsage.mekanismaddons.config.AddonConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
@@ -28,8 +29,8 @@ public class ModuleIgnitionRetardationUnit extends ModuleMekaSuit {
     public ModuleIgnitionRetardationUnit() { }
 
     public boolean handleDamageSource(LivingEntity entity, DamageSource damageSource) {
-        if (isEnabled() && IMMUNE_TO_SOURCES.contains(damageSource)) {
-            int usage = 1234 / getInstalledCount();
+        if (AddonConfig.general.ignitionRetardationUnitEnabled.get() && isEnabled() && IMMUNE_TO_SOURCES.contains(damageSource)) {
+            int usage = AddonConfig.general.mekaSuitSodiumUsageRate.get() / getInstalledCount();
 
             Optional<IGasHandler> capability = this.getContainer().getCapability(Capabilities.GAS_HANDLER_CAPABILITY).resolve();
 
@@ -46,16 +47,11 @@ public class ModuleIgnitionRetardationUnit extends ModuleMekaSuit {
     }
 
     @Override
-    protected void tickServer(PlayerEntity player) {
-        super.tickServer(player);
+    public void tick(PlayerEntity player) {
+        super.tick(player);
 
-        if (player.isOnFire()) player.clearFire();
-    }
-
-    @Override
-    protected void tickClient(PlayerEntity player) {
-        super.tickClient(player);
-
-        if (player.isOnFire()) player.clearFire();
+        if (AddonConfig.general.ignitionRetardationUnitEnabled.get() && player.isOnFire()) {
+            player.clearFire();
+        }
     }
 }

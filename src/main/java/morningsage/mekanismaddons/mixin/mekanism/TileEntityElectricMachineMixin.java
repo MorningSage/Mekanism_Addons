@@ -2,6 +2,7 @@ package morningsage.mekanismaddons.mixin.mekanism;
 
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.recipes.outputs.IOutputHandler;
+import mekanism.api.recipes.outputs.OutputHelper;
 import mekanism.common.tile.prefab.TileEntityElectricMachine;
 import morningsage.mekanismaddons.recipes.SmartItemStackOutputHandler;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,7 @@ public abstract class TileEntityElectricMachineMixin {
         remap = false
     )
     protected IOutputHandler<ItemStack> init(IInventorySlot outputSlot) {
-        return new SmartItemStackOutputHandler((TileEntityElectricMachine)(Object) this, outputSlot);
+        return SmartItemStackOutputHandler.getOutputHandler(OutputHelper.getOutputHandler(outputSlot), (TileEntityElectricMachine) (Object) this, outputSlot);
     }
 
 }

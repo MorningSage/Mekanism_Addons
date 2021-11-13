@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mojang.blaze3d.vertex.MatrixApplyingVertexBuilder;
 import mekanism.common.content.gear.Modules;
+import morningsage.mekanismaddons.config.AddonConfig;
 import morningsage.mekanismaddons.items.modules.AddonModules;
 import morningsage.mekanismaddons.items.modules.ModuleAOEUnit;
 import morningsage.mekanismaddons.mixin.minecraft.PlayerControllerAccessor;
@@ -28,7 +29,7 @@ import net.minecraftforge.client.model.data.EmptyModelData;
 public final class ClientUtils {
 
     public static void onBlockHover(DrawHighlightEvent.HighlightBlock event) {
-        if (event.isCanceled()) return;
+        if (event.isCanceled() || !AddonConfig.general.aoeUnitEnabled.get()) return;
 
         PlayerEntity player = Minecraft.getInstance().player;
         if (player == null) return;
