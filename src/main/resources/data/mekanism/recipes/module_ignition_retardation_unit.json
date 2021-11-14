@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "result": {
+    "item": "mekanismaddons:module_ignition_retardation_unit"
+  },
+  "pattern": [
+    "I#I",
+    "GAG",
+    "PPP"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:alloys/advanced"
+    },
+    "G": {
+      "item": "mekanism:basic_chemical_tank"
+    },
+    "A": {
+      "item": "mekanism:module_base"
+    },
+    "#": {
+      "type": "forge:nbt",
+      "item": "minecraft:potion",
+      "nbt": {
+        "Potion": "minecraft:long_fire_resistance"
+      }
+    },
+    "P": {
+      "item": "mekanism:hdpe_sheet"
+    }
+  }
+}

@@ -1,12 +1,22 @@
 {
-  "type" : "minecraft:crafting_shaped",
-  "result" : {
-    "item" : "mekanismaddons:upgrade_luck"
+  "type": "minecraft:crafting_shaped",
+  "result": {
+    "item": "mekanismaddons:upgrade_luck"
   },
-  "pattern" : [" G ", "A#A", " G "],
-  "key" : {
-    "G" : { "tag" : "forge:glass" },
-    "#" : { "item" : "mekanism:pellet_antimatter" },
-    "A" : { "tag" : "mekanism:alloys/infused" }
+  "pattern": [
+    " # ",
+    "AGA",
+    " # "
+  ],
+  "key": {
+    "G": {
+      "item": "mekanism:pellet_plutonium"
+    },
+    "#": {
+      "item": "mekanism:pellet_antimatter"
+    },
+    "A": {
+      "item": "mekanism:pellet_polonium"
+    }
   }
 }
