@@ -24,10 +24,29 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class ModuleAOEUnit extends ModuleMekaTool {
+public class ModuleAOEUnit extends ModuleMekaTool implements IHasSmartEnable {
     private ModuleConfigItem<AOERange> range;
+
+    public static final Set<Modules.ModuleData<?>> INCOMPATIBLE = new HashSet<>(
+        Collections.singletonList(
+            Modules.VEIN_MINING_UNIT
+        )
+    );
+
+    @Override
+    public ItemStack getContainer() {
+        return super.getContainer();
+    }
+
+    @Override
+    public Set<Modules.ModuleData<?>> getIncompatibleModules() {
+        return INCOMPATIBLE;
+    }
 
     @Override
     public void init() {

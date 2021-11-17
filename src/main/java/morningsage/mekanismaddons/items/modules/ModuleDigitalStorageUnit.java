@@ -7,6 +7,8 @@ import mekanism.api.text.IHasTextComponent;
 import mekanism.api.text.TextComponentUtil;
 import mekanism.common.MekanismLang;
 import mekanism.common.content.gear.ModuleConfigItem;
+import mekanism.common.content.gear.Modules;
+import mekanism.common.content.gear.Modules.ModuleData;
 import mekanism.common.content.gear.mekatool.ModuleMekaTool;
 import morningsage.mekanismaddons.MekanismAddonsLang;
 import morningsage.mekanismaddons.ae2.AE2Actions;
@@ -25,11 +27,30 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
-public class ModuleDigitalStorageUnit extends ModuleMekaTool {
+public class ModuleDigitalStorageUnit extends ModuleMekaTool implements IHasSmartEnable {
     private ModuleConfigItem<StorageMode> storageMode;
+
+    public static final Set<ModuleData<?>> INCOMPATIBLE = new HashSet<>(
+        Collections.singletonList(
+            Modules.TELEPORTATION_UNIT
+        )
+    );
+
+    @Override
+    public ItemStack getContainer() {
+        return super.getContainer();
+    }
+
+    @Override
+    public Set<ModuleData<?>> getIncompatibleModules() {
+        return INCOMPATIBLE;
+    }
 
     @Override
     public void init() {
@@ -39,6 +60,11 @@ public class ModuleDigitalStorageUnit extends ModuleMekaTool {
                 this, "storage_mode", MekanismAddonsLang.MODULE_STORAGE_MODE, new ModuleConfigItem.EnumData<>(StorageMode.class, StorageMode.values().length), StorageMode.OFF
             )
         );
+    }
+
+    @Override
+    protected void toggleEnabled(PlayerEntity player, ITextComponent modeName) {
+        super.toggleEnabled(player, modeName);
     }
 
     public void onMekaToolUse(MekaToolUsageEvent.Use event) {

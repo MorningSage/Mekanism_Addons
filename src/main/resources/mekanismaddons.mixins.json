@@ -9,6 +9,8 @@
     "mekanism.EnumUtilsAccessor",
     "mekanism.ItemMekaSuitArmorMixin",
     "mekanism.ItemMekaToolMixin",
+    "mekanism.MiscModuleMixin",
+    "mekanism.ModuleConfigItemMixin",
     "mekanism.ModuleDataAccessor",
     "mekanism.ModuleNutritionalInjectionUnitMixin",
     "mekanism.ModulesAccessor",

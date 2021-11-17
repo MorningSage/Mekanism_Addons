@@ -94,7 +94,7 @@ public class AddonModules {
             MekanismAddonsLang.DESCRIPTION_AOE_UNIT,
             ModuleAOEUnit::new,
             ModuleAOEUnit.AOERange.values().length - 1
-        ).rarity(Rarity.RARE).setExclusive().setRendersHUD().setDisabledByDefault().setHandlesModeChange();
+        ).rarity(Rarity.RARE).setRendersHUD().setDisabledByDefault().setHandlesModeChange();
 
         AMBULATION_ACCELERATION_UNIT = register(
             "ambulation_acceleration_unit",
@@ -112,8 +112,6 @@ public class AddonModules {
             4
         ).rarity(Rarity.RARE);
 
-        Modules.VEIN_MINING_UNIT.setExclusive();
-
         ((ModuleDataAccessor) Modules.NUTRITIONAL_INJECTION_UNIT).setMaxStackSize(2);
 
         DIGITAL_STORAGE_UNIT = register(
@@ -121,7 +119,7 @@ public class AddonModules {
             MekanismAddonsLang.MODULE_DIGITAL_STORAGE_UNIT,
             MekanismAddonsLang.DESCRIPTION_DIGITAL_STORAGE_UNIT,
             ModuleDigitalStorageUnit::new
-        ).rarity(Rarity.RARE).setExclusive().setHandlesModeChange().setRendersHUD();
+        ).rarity(Rarity.RARE).setHandlesModeChange().setRendersHUD();
 
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onMekaToolBreakBlock);
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onMekaToolDestroySpeed);
