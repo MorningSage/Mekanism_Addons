@@ -1,7 +1,6 @@
 package morningsage.mekanismaddons;
 
 import mekanism.api.text.ILangEntry;
-import morningsage.mekanismaddons.MekanismAddons;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 
@@ -21,6 +20,10 @@ public enum MekanismAddonsLang implements ILangEntry {
     MODULE_IGNITION_RETARDATION_UNIT("module", "ignition_retardation_unit"),
     DESCRIPTION_IGNITION_RETARDATION_UNIT("description", "ignition_retardation_unit"),
     MODULE_WALK_BOOST("module", "walk_boost"),
+    MODULE_DIGITAL_STORAGE_UNIT("module", "digital_storage_unit"),
+    DESCRIPTION_DIGITAL_STORAGE_UNIT("description", "digital_storage_unit"),
+    MODULE_STORAGE_MODE("module", "storage_mode"),
+    HUD_STORAGE_MODE("hud", "storage_mode"),
     ;
 
     private final String key;
@@ -29,7 +32,9 @@ public enum MekanismAddonsLang implements ILangEntry {
         this(Util.makeDescriptionId(type, new ResourceLocation(MekanismAddons.MOD_ID, path)));
     }
 
-    MekanismAddonsLang(String key) { this.key = key; }
+    MekanismAddonsLang(String key) {
+        this.key = key;
+    }
 
     public String getTranslationKey() { return this.key; }
 }

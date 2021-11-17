@@ -17,14 +17,17 @@ import mekanism.common.registration.impl.ItemRegistryObject;
 import mekanism.common.registries.MekanismGases;
 import mekanism.common.registries.MekanismItems;
 import morningsage.mekanismaddons.MekanismAddonsLang;
+import morningsage.mekanismaddons.ae2.AE2Actions;
 import morningsage.mekanismaddons.config.AddonConfig;
 import morningsage.mekanismaddons.events.CustomEventBus;
 import morningsage.mekanismaddons.events.mekasuit.MekaSuitArmorInit;
 import morningsage.mekanismaddons.events.mekasuit.MekaSuitArmorTick;
 import morningsage.mekanismaddons.events.mekatool.MekaToolBlockBreakEvent;
 import morningsage.mekanismaddons.events.mekatool.MekaToolDestroySpeedEvent;
+import morningsage.mekanismaddons.events.mekatool.MekaToolUsageEvent;
 import morningsage.mekanismaddons.mixin.mekanism.ModuleDataAccessor;
 import morningsage.mekanismaddons.mixin.mekanism.ModulesAccessor;
+import morningsage.mekanismaddons.plugins.AE2Plugin;
 import morningsage.mekanismaddons.utils.AOEUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -60,6 +63,7 @@ public class AddonModules {
     public static ModuleData<ModuleAOEUnit> AOE_UNIT;
     public static ModuleData<ModuleAmbulationAccelerationUnit> AMBULATION_ACCELERATION_UNIT;
     public static ModuleData<ModuleIgnitionRetardationUnit> IGNITION_RETARDATION_UNIT;
+    public static ModuleData<ModuleDigitalStorageUnit> DIGITAL_STORAGE_UNIT;
 
     static {
         DIHYDROGEN_MONOXIDE_AVIDITY_UNIT = register(
@@ -112,6 +116,13 @@ public class AddonModules {
 
         ((ModuleDataAccessor) Modules.NUTRITIONAL_INJECTION_UNIT).setMaxStackSize(2);
 
+        DIGITAL_STORAGE_UNIT = register(
+            "digital_storage_unit",
+            MekanismAddonsLang.MODULE_DIGITAL_STORAGE_UNIT,
+            MekanismAddonsLang.DESCRIPTION_DIGITAL_STORAGE_UNIT,
+            ModuleDigitalStorageUnit::new
+        ).rarity(Rarity.RARE).setExclusive().setHandlesModeChange().setRendersHUD();
+
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onMekaToolBreakBlock);
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onMekaToolDestroySpeed);
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onGetBreakSpeed);
@@ -119,6 +130,7 @@ public class AddonModules {
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onMekaSuitArmorTick);
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onPlayerDamage);
         MinecraftForge.EVENT_BUS.addListener(AddonModules::onPlayerRenderOverlay);
+        MinecraftForge.EVENT_BUS.addListener(AddonModules::onMekaToolUsage);
 
         CustomEventBus.EVENT_BUS.addListener(AddonModules::onMekaSuitInit);
 
@@ -168,16 +180,28 @@ public class AddonModules {
         event.setDestroySpeed(hardestHardness);
     }
 
+    public static void onMekaToolUsage(final MekaToolUsageEvent event) {
+        if (event.isCanceled() || !AddonConfig.general.digitalStorageUnitEnabled.get()) return;
+        ModuleDigitalStorageUnit module = Modules.load(event.getStack(), AddonModules.DIGITAL_STORAGE_UNIT);
+
+        if (module != null) {
+            if (event instanceof MekaToolUsageEvent.Use) module.onMekaToolUse((MekaToolUsageEvent.Use) event);
+        }
+    }
+
     public static void setupModules(final FMLCommonSetupEvent event) {
         Modules.setSupported(MekanismItems.MEKASUIT_HELMET.getItem(), AddonModules.DIHYDROGEN_MONOXIDE_AVIDITY_UNIT, AddonModules.ATMOSPHERIC_AVIDITY_UNIT);
-        Modules.setSupported(MekanismItems.MEKA_TOOL.getItem(), AddonModules.CAPTURING_UNIT, AddonModules.AOE_UNIT);
-        Modules.setSupported(MekanismItems.MEKASUIT_PANTS.getItem(), AddonModules.AMBULATION_ACCELERATION_UNIT, AddonModules.IGNITION_RETARDATION_UNIT);
+        Modules.setSupported(MekanismItems.MEKA_TOOL.getItem(), AddonModules.CAPTURING_UNIT, AddonModules.AOE_UNIT, AddonModules.DIGITAL_STORAGE_UNIT);
+        Modules.setSupported(MekanismItems.MEKASUIT_PANTS.getItem(), AddonModules.IGNITION_RETARDATION_UNIT);
+        Modules.setSupported(MekanismItems.MEKASUIT_BOOTS.getItem(), AddonModules.AMBULATION_ACCELERATION_UNIT);
         Modules.resetSupportedContainers();
         Modules.processSupportedContainers();
 
         for (Modules.ModuleData<?> module : AddonModules.ADDON_MODULES_BY_NAME.values()) {
             ModulesAccessor.getModules().put(module.getName(), module);
         }
+
+        if (AE2Plugin.isLoaded) AE2Actions.registerMekaToolTerminal();
     }
 
     public static void onGetBreakSpeed(final PlayerEvent.BreakSpeed event) {

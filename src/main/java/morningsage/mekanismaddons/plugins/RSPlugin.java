@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-public class AE2Plugin implements IMixinConfigPlugin {
+public class RSPlugin implements IMixinConfigPlugin {
 
-    public static final String MOD_ID = "appliedenergistics2";
+    public static final String MOD_ID = "refinedstorage";
     // ToDo: ModList.get() is returning null
     public static final boolean isLoaded = FMLLoader.getLoadingModList().getModFileById(MOD_ID) != null;
 

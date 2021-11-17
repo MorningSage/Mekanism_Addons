@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "result": {
+    "item": "mekanismaddons:module_digital_storage_unit"
+  },
+  "pattern": [
+    "IEI",
+    "IAI",
+    "PPP"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:alloys/elite"
+    },
+    "E": {
+      "item": "mekanism:qio_dashboard"
+    },
+    "A": {
+      "item": "mekanism:module_base"
+    },
+    "P": {
+      "item": "mekanism:pellet_polonium"
+    }
+  }
+}

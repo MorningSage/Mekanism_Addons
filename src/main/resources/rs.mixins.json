@@ -1,15 +1,17 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "morningsage.mekanismaddons.mixin.ae2",
+  "package": "morningsage.mekanismaddons.mixin.rs",
   "refmap": "mekanismaddons.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ItemMekaToolMixin"
+    "ItemMekaToolMixin",
+    "NetworkItemMixin",
+    "WirelessGridNetworkItemMixin"
   ],
   "client": [
   ],
-  "plugin": "morningsage.mekanismaddons.plugins.AE2Plugin",
+  "plugin": "morningsage.mekanismaddons.plugins.RSPlugin",
   "injectors": {
     "defaultRequire": 1
   }
