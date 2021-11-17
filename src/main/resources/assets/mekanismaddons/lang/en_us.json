@@ -18,6 +18,7 @@
   "description.mekanismaddons.digital_storage_unit": "Allows you to link your Meka-Tool to your digital storage solution for wireless access.",
   "module.mekanismaddons.storage_mode": "Storage Mode",
   "hud.mekanismaddons.storage_mode": "Storage Mode: %s",
+  "module.mekanismaddons.digital_mod_not_found": "%s is not installed.",
   "module.mekanismaddons.walk_boost": "Walk Boost",
   "upgrade.mekanism.luck": "Luck",
   "upgrade.mekanism.luck.description": "Gives a small chance to double the processing output.",
@@ -25,7 +26,6 @@
   "item.mekanismaddons.4k_gas_cell_component": "4k ME Gas Storage Component",
   "item.mekanismaddons.16k_gas_cell_component": "16k ME Gas Storage Component",
   "item.mekanismaddons.64k_gas_cell_component": "64k ME Gas Storage Component",
-
   "item.mekanismaddons.1k_gas_storage_cell": "1k ME Gas Storage Cell",
   "item.mekanismaddons.4k_gas_storage_cell": "4k ME Gas Storage Cell",
   "item.mekanismaddons.16k_gas_storage_cell": "16k ME Gas Storage Cell",

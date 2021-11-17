@@ -62,11 +62,6 @@ public class ModuleDigitalStorageUnit extends ModuleMekaTool implements IHasSmar
         );
     }
 
-    @Override
-    protected void toggleEnabled(PlayerEntity player, ITextComponent modeName) {
-        super.toggleEnabled(player, modeName);
-    }
-
     public void onMekaToolUse(MekaToolUsageEvent.Use event) {
         if (!canFunction() || !(event.getEntity() instanceof PlayerEntity)) return;
 
@@ -198,8 +193,14 @@ public class ModuleDigitalStorageUnit extends ModuleMekaTool implements IHasSmar
 
         @Override
         public ActionResult<ItemStack> useCustomTerminal(World world, PlayerEntity player, ItemStack stack, Hand hand) {
-            if (loadedCheck) {
-                return this.digitalStorage.get().useCustomTerminal(world, player, stack, hand);
+            if (this != OFF) {
+                if (loadedCheck) {
+                    return this.digitalStorage.get().useCustomTerminal(world, player, stack, hand);
+                }
+
+                if (!world.isClientSide()) {
+                    player.sendMessage(MekanismLang.LOG_FORMAT.translateColored(EnumColor.DARK_BLUE, MekanismLang.MEKANISM, EnumColor.GRAY, MekanismAddonsLang.MODULE_DIGITAL_NOT_FOUND.translate(MekanismAddonsLang.HUD_STORAGE_MODE.translate(getTextComponent()))), Util.NIL_UUID);
+                }
             }
 
             return null;

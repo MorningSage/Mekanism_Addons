@@ -24,6 +24,7 @@ public enum MekanismAddonsLang implements ILangEntry {
     DESCRIPTION_DIGITAL_STORAGE_UNIT("description", "digital_storage_unit"),
     MODULE_STORAGE_MODE("module", "storage_mode"),
     HUD_STORAGE_MODE("hud", "storage_mode"),
+    MODULE_DIGITAL_NOT_FOUND("module", "digital_mod_not_found"),
     ;
 
     private final String key;
