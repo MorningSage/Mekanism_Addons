@@ -62,7 +62,7 @@ public class ModuleDigitalStorageUnit extends ModuleMekaTool {
 
     @Override
     public void changeMode(@Nonnull PlayerEntity player, @Nonnull ItemStack stack, int shift, boolean displayChangeMessage) {
-        if (!AddonConfig.general.digitalStorageUnitEnabled.get()) return;
+        if (!isEnabled() || !AddonConfig.general.digitalStorageUnitEnabled.get()) return;
 
         StorageMode newMode = storageMode.get().adjust(shift);
 

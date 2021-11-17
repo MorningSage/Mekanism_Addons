@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.function.Supplier;
 
-@Mixin(Modules.ModuleData.class)
+@Mixin(value = Modules.ModuleData.class, remap = false)
 public interface ModuleDataAccessor {
 
     @Invoker("<init>")

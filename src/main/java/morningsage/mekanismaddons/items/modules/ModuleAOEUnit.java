@@ -54,7 +54,7 @@ public class ModuleAOEUnit extends ModuleMekaTool {
 
     @Override
     public void changeMode(@Nonnull PlayerEntity player, @Nonnull ItemStack stack, int shift, boolean displayChangeMessage) {
-        if (!AddonConfig.general.aoeUnitEnabled.get()) return;
+        if (!isEnabled() || !AddonConfig.general.aoeUnitEnabled.get()) return;
 
         AOERange newMode = range.get().adjust(shift);
 

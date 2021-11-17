@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(OutputHelper.class)
+@Mixin(value = OutputHelper.class, remap = false)
 public interface OutputHelperAccessor {
 
     @Invoker("handleOutput")
