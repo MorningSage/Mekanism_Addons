@@ -105,13 +105,13 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
     compileOnly fg.deobf("curse.maven:Mekanism-268560:3206392")
-    compileOnly fg.deobf("appeng:appliedenergistics2:8.4.3")
+    compileOnly fg.deobf("appeng:appliedenergistics2:8.4.4")
     compileOnly fg.deobf("curse.maven:RefinedStorage-243076:3527504")
 
     runtimeOnly fg.deobf("curse.maven:Mekanism-268560:3206392")
     runtimeOnly fg.deobf("curse.maven:JEI-238222:3480853")
     runtimeOnly fg.deobf("curse.maven:AppleSkin-248787:3395800")
-    runtimeOnly fg.deobf("appeng:appliedenergistics2:8.4.3")
+    runtimeOnly fg.deobf("appeng:appliedenergistics2:8.4.4")
     runtimeOnly fg.deobf("curse.maven:RefinedStorage-243076:3527504")
 }
 
