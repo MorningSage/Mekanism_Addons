@@ -4,6 +4,7 @@ import com.refinedmods.refinedstorage.RSItems;
 import com.refinedmods.refinedstorage.api.network.item.INetworkItem;
 import com.refinedmods.refinedstorage.api.network.item.INetworkItemManager;
 import com.refinedmods.refinedstorage.apiimpl.network.item.WirelessGridNetworkItem;
+import com.refinedmods.refinedstorage.inventory.player.PlayerSlot;
 import morningsage.mekanismaddons.items.modules.ModuleDigitalStorageUnit;
 import morningsage.mekanismaddons.plugins.IDigitalStorage;
 import morningsage.mekanismaddons.plugins.RSPlugin;
@@ -55,8 +56,8 @@ public final class RSActions implements IDigitalStorage {
         return RSItems.WIRELESS_GRID.get().use(world, entity, hand);
     }
 
-    public static INetworkItem provide(INetworkItemManager iNetworkItemManager, PlayerEntity playerEntity, ItemStack itemStack, int i) {
-        return new WirelessGridNetworkItem(iNetworkItemManager, playerEntity, itemStack, i);
+    public static INetworkItem provide(INetworkItemManager iNetworkItemManager, PlayerEntity playerEntity, ItemStack itemStack, PlayerSlot slot) {
+        return new WirelessGridNetworkItem(iNetworkItemManager, playerEntity, itemStack, slot);
     }
 
     public static CompoundNBT getTag(ItemStack stack) {
