@@ -97,6 +97,7 @@ repositories {
         }
     }
     maven { url 'https://cursemaven.com/' }
+    maven { url 'https://maven.theillusivec4.top/' }
 }
 
 dependencies {
@@ -107,12 +108,14 @@ dependencies {
     compileOnly fg.deobf("curse.maven:Mekanism-268560:3206392")
     compileOnly fg.deobf("appeng:appliedenergistics2:8.4.4")
     compileOnly fg.deobf("curse.maven:RefinedStorage-243076:3527504")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.3:api")
 
     runtimeOnly fg.deobf("curse.maven:Mekanism-268560:3206392")
     runtimeOnly fg.deobf("curse.maven:JEI-238222:3480853")
     runtimeOnly fg.deobf("curse.maven:AppleSkin-248787:3395800")
     runtimeOnly fg.deobf("appeng:appliedenergistics2:8.4.4")
     runtimeOnly fg.deobf("curse.maven:RefinedStorage-243076:3527504")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.5-4.0.5.3")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

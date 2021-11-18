@@ -7,6 +7,11 @@ import mekanism.common.item.ItemUpgrade;
 import mekanism.common.registration.impl.ItemDeferredRegister;
 import morningsage.mekanismaddons.items.modules.AddonModules;
 import morningsage.mekanismaddons.items.upgrades.AddonUpgrades;
+import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 public final class AddonItems {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister("mekanismaddons");
@@ -23,5 +28,11 @@ public final class AddonItems {
                 new ItemUpgrade(upgrade, properties)
             ));
         }
+
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(AddonItems::enqueueIMC);
+    }
+
+    private static void enqueueIMC(final InterModEnqueueEvent event) {
+        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder(SlotTypePreset.CHARM.getIdentifier()).build());
     }
 }
