@@ -15,6 +15,8 @@ import mekanism.common.registries.MekanismItems;
 import morningsage.mekanismaddons.MekanismAddonsLang;
 import morningsage.mekanismaddons.config.AddonConfig;
 import morningsage.mekanismaddons.events.mekatool.MekaToolBlockBreakEvent;
+import morningsage.mekanismaddons.utils.AOEUtils;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -95,11 +97,14 @@ public class ModuleAOEUnit extends ModuleMekaTool implements IHasSmartEnable {
         ItemStack stack = getContainer();
         World world = player.level;
 
+        BlockState centerState = world.getBlockState(centerPos);
         boolean silk = MekanismItems.MEKA_TOOL.get().isModuleEnabled(stack, Modules.SILK_TOUCH_UNIT);
 
-        for (BlockPos blockPos : area) {
-            if (world.getBlockState(blockPos).hasTileEntity() || centerPos.equals(blockPos)) continue;
-            callback.breakBlock(stack, world, blockPos, player, energyContainer, silk);
+        for (BlockPos queryPos : area) {
+            BlockState queryState = world.getBlockState(queryPos);
+            boolean isBlockValid = AOEUtils.canBlockAOE(world, queryPos, queryState, null, centerPos, centerState) && !queryPos.equals(centerPos);
+
+            if (isBlockValid) callback.breakBlock(stack, world, queryPos, player, energyContainer, silk);
         }
     }
 
