@@ -61,5 +61,5 @@ This mod adds various items to Mekanism that may be missing or are simply qualit
     modId="mekanism"
     mandatory=true
     versionRange="10.0.21.448"
-    ordering="NONE"
+    ordering="AFTER"
     side="BOTH"

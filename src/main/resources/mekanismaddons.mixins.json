@@ -5,6 +5,8 @@
   "refmap": "mekanismaddons.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "mekanism.APILangMixin",
+    "mekanism.UpgradeMixin",
     "mekanism.AbstractBlockMixin",
     "mekanism.EnumUtilsAccessor",
     "mekanism.ItemMekaSuitArmorMixin",

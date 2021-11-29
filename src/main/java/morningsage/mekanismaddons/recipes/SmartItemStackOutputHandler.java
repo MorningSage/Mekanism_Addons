@@ -1,17 +1,17 @@
 package morningsage.mekanismaddons.recipes;
 
+import javax.annotation.Nonnull;
+
 import mekanism.api.Upgrade;
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.recipes.outputs.IOutputHandler;
 import mekanism.common.config.MekanismConfig;
 import mekanism.common.tile.base.TileEntityMekanism;
 import morningsage.mekanismaddons.config.AddonConfig;
-import morningsage.mekanismaddons.items.upgrades.AddonUpgrades;
 import morningsage.mekanismaddons.mixin.mekanism.OutputHelperAccessor;
+import morningsage.mekanismaddons.utils.EnumNames;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import javax.annotation.Nonnull;
 
 public class SmartItemStackOutputHandler implements IOutputHandler<ItemStack> {
     private final TileEntityMekanism tileEntity;
@@ -26,7 +26,7 @@ public class SmartItemStackOutputHandler implements IOutputHandler<ItemStack> {
     public void handleOutput(@Nonnull ItemStack toOutput, int operations) {
         World level = tileEntity.getLevel();
 
-        double effect = Math.pow(MekanismConfig.general.maxUpgradeMultiplier.get(), getInstalledCount(AddonUpgrades.LUCK_UPGRADE) / (float) AddonUpgrades.LUCK_UPGRADE.getMax());
+        double effect = Math.pow(MekanismConfig.general.maxUpgradeMultiplier.get(), getInstalledCount(Upgrade.valueOf(EnumNames.LUCK.toUpperCase())) / (float) Upgrade.valueOf(EnumNames.LUCK.toUpperCase()).getMax());
 
         if (level != null && level.random.nextFloat() < effect / 500.0F) operations <<= 1;
 

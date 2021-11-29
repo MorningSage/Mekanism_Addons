@@ -1,54 +1,23 @@
 package morningsage.mekanismaddons.items.upgrades;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import java.util.Collections;
+import java.util.HashSet;
+
 import mekanism.api.Upgrade;
-import mekanism.api.text.APILang;
-import mekanism.api.text.EnumColor;
 import mekanism.common.block.attribute.AttributeUpgradeSupport;
 import mekanism.common.content.blocktype.BlockTypeTile;
 import mekanism.common.content.blocktype.FactoryType;
-import mekanism.common.item.ItemUpgrade;
-import mekanism.common.registration.impl.ItemRegistryObject;
 import mekanism.common.registries.MekanismBlockTypes;
 import mekanism.common.tier.FactoryTier;
-import mekanism.common.util.EnumUtils;
-import morningsage.mekanismaddons.mixin.mekanism.EnumUtilsAccessor;
-import morningsage.mekanismaddons.utils.EnumBuilder;
-
-import java.lang.reflect.Array;
-import java.util.*;
+import morningsage.mekanismaddons.utils.EnumNames;
 
 public class AddonUpgrades {
+    public static void init() {
+        registerSupportedUpgrades(MekanismBlockTypes.ENERGIZED_SMELTER, Upgrade.valueOf(EnumNames.LUCK.toUpperCase()));
+        registerSupportedUpgrades(MekanismBlockTypes.ENRICHMENT_CHAMBER, Upgrade.valueOf(EnumNames.LUCK.toUpperCase()));
 
-    public static final Map<String, Upgrade> UPGRADES_BY_NAME = new Object2ObjectOpenHashMap<>();
-    public static final Map<Upgrade, ItemRegistryObject<? extends ItemUpgrade>> UPGRADES_BY_DATA = new LinkedHashMap<>();
-
-    private static final EnumBuilder<APILang> langEnumBuilder = EnumBuilder.of(APILang.class);
-    private static final EnumBuilder<Upgrade> upgradeEnumBuilder = EnumBuilder.of(Upgrade.class);
-
-    public static final APILang UPGRADE_LUCK = langEnumBuilder.create("UPGRADE_LUCK").init("upgrade", "luck");
-    public static final APILang UPGRADE_LUCK_DESCRIPTION = langEnumBuilder.create("UPGRADE_LUCK_DESCRIPTION").init("upgrade", "luck.description");
-    public static final Upgrade LUCK_UPGRADE;
-
-    static {
-        LUCK_UPGRADE = registerUpgrade("luck", UPGRADE_LUCK, UPGRADE_LUCK_DESCRIPTION, 4, EnumColor.ORANGE);
-
-        registerSupportedUpgrades(MekanismBlockTypes.ENERGIZED_SMELTER, LUCK_UPGRADE);
-        registerSupportedUpgrades(MekanismBlockTypes.ENRICHMENT_CHAMBER, LUCK_UPGRADE);
-
-        registerSupportedUpgrades(FactoryType.SMELTING, LUCK_UPGRADE);
-        registerSupportedUpgrades(FactoryType.ENRICHING, LUCK_UPGRADE);
-    }
-
-    private static Upgrade registerUpgrade(String name, APILang langKey, APILang descLangKey, int maxStack, EnumColor color) {
-        Upgrade upgrade = upgradeEnumBuilder.create(name.toUpperCase()).init(name, langKey, descLangKey, maxStack, color);
-        UPGRADES_BY_NAME.put(name, upgrade);
-
-        List<Upgrade> values = new ArrayList<>(Arrays.asList(EnumUtils.UPGRADES));
-        values.add(upgrade);
-        EnumUtilsAccessor.setUpgrades(values.toArray((Upgrade[]) Array.newInstance(Upgrade.class, 0)));
-
-        return upgrade;
+        registerSupportedUpgrades(FactoryType.SMELTING, Upgrade.valueOf(EnumNames.LUCK.toUpperCase()));
+        registerSupportedUpgrades(FactoryType.ENRICHING, Upgrade.valueOf(EnumNames.LUCK.toUpperCase()));
     }
 
     private static void registerSupportedUpgrades(BlockTypeTile<?> blockTypeTile, Upgrade... upgrades) {

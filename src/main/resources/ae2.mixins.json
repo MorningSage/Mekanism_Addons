@@ -5,7 +5,8 @@
   "refmap": "mekanismaddons.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ItemMekaToolMixin"
+    "ItemMekaToolMixin",
+    "MaterialTypeMixin"
   ],
   "client": [
   ],
