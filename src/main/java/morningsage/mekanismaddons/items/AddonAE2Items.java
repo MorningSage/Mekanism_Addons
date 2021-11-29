@@ -1,5 +1,9 @@
 package morningsage.mekanismaddons.items;
 
+import java.util.function.Function;
+
+import com.google.common.base.Preconditions;
+
 import appeng.api.definitions.IDefinitions;
 import appeng.api.parts.IPart;
 import appeng.api.util.AEColor;
@@ -13,20 +17,17 @@ import appeng.items.materials.MaterialType;
 import appeng.items.parts.PartItem;
 import appeng.items.parts.PartModelsHelper;
 import appeng.util.Platform;
-import com.google.common.base.Preconditions;
 import mekanism.common.registration.impl.ItemDeferredRegister;
 import mekanism.common.registration.impl.ItemRegistryObject;
-import morningsage.mekanismaddons.ae2.AddonMaterialType;
 import morningsage.mekanismaddons.ae2.GasStorageCell;
 import morningsage.mekanismaddons.ae2.channels.GasStorageChannel;
 import morningsage.mekanismaddons.ae2.gas.GasDummyItem;
 import morningsage.mekanismaddons.ae2.gas.GasDummyItemColor;
 import morningsage.mekanismaddons.ae2.parts.GasTerminalPart;
+import morningsage.mekanismaddons.utils.EnumNames;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import java.util.function.Function;
 
 public class AddonAE2Items {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister("mekanismaddons");
@@ -37,7 +38,7 @@ public class AddonAE2Items {
     private static final ItemRegistryObject<GasDummyItem> gasDummyItem;
 
     static {
-        for (MaterialType type : AddonMaterialType.DATA_BY_TYPE.keySet()) {
+        for (MaterialType type : EnumNames.DATA_BY_TYPE.keySet()) {
             Preconditions.checkState(!type.isRegistered(), "Cannot create the same material twice.");
 
             ITEMS.register(type.getId(), (props) -> {
@@ -48,7 +49,7 @@ public class AddonAE2Items {
             type.markReady();
 
             ITEMS.register(type.getId().replace("cell_component", "storage_cell"), (properties) ->
-                new GasStorageCell(properties, type, AddonMaterialType.DATA_BY_TYPE.get(type).getA() >> 3)
+                new GasStorageCell(properties, type, EnumNames.DATA_BY_TYPE.get(type).getA() >> 3)
             );
         }
 

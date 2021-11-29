@@ -1,5 +1,7 @@
 package morningsage.mekanismaddons.ae2;
 
+import javax.annotation.Nonnull;
+
 import appeng.api.storage.IStorageChannel;
 import appeng.core.Api;
 import appeng.items.materials.MaterialType;
@@ -7,12 +9,11 @@ import appeng.items.storage.AbstractStorageCell;
 import appeng.util.InventoryAdaptor;
 import morningsage.mekanismaddons.ae2.channels.IGasStorageChannel;
 import morningsage.mekanismaddons.ae2.gas.IAEGasStack;
+import morningsage.mekanismaddons.utils.EnumNames;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Tuple;
 import net.minecraftforge.items.IItemHandler;
-
-import javax.annotation.Nonnull;
 
 public class GasStorageCell extends AbstractStorageCell<IAEGasStack> {
     private final int perType;
@@ -21,7 +22,7 @@ public class GasStorageCell extends AbstractStorageCell<IAEGasStack> {
     public GasStorageCell(Properties properties, MaterialType whichCell, int kilobytes) {
         super(properties, whichCell, kilobytes);
 
-        Tuple<Integer, Double> data = AddonMaterialType.DATA_BY_TYPE.getOrDefault(whichCell, new Tuple<>(8, 0.0D));
+        Tuple<Integer, Double> data = EnumNames.DATA_BY_TYPE.getOrDefault(whichCell, new Tuple<>(8, 0.0D));
 
         perType = data.getA();
         idleDrain = data.getB();
